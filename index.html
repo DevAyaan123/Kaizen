@@ -14,7 +14,6 @@
   .controls { text-align: center; margin-bottom: 40px; display: flex; justify-content: center; gap: 15px; }
   .btn { padding: 10px 20px; font-size: 1rem; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: opacity 0.2s; }
   .btn-text { background: #3182ce; }
-  .btn-code { background: #4a5568; }
   .btn:hover { opacity: 0.9; }
   .board-layout { display: flex; max-width: 1100px; margin: 0 auto; gap: 30px; justify-content: center; flex-wrap: wrap; }
   .board-col { flex: 1; min-width: 320px; background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); min-height: 500px; }
@@ -23,21 +22,18 @@
   #col-done h2 { border-color: #68d391; }
   .notes-container { display: flex; flex-wrap: wrap; gap: 16px; min-height: 400px; }
   .note { width: 140px; height: 140px; padding: 15px; font-family: 'Gochi Hand', cursive; font-size: 1.35rem; line-height: 1.2; cursor: pointer; box-shadow: 3px 3px 8px rgba(0,0,0,0.15); transition: all 0.15s ease-in-out; display: flex; align-items: center; justify-content: center; text-align: center; word-break: break-word; overflow: hidden; }
-  .note.code-note { font-family: 'Fira Code', monospace; font-size: 0.85rem; background: #2d3748 !important; color: #cbd5e0 !important; text-align: left; align-items: flex-start; justify-content: flex-start; }
   .note:nth-child(3n+1) { transform: rotate(-2deg); }
   .note:nth-child(3n+2) { transform: rotate(3deg); }
   .note:nth-child(3n+3) { transform: rotate(-1deg); }
   .note:hover { transform: scale(1.08) rotate(0deg) !important; box-shadow: 5px 8px 12px rgba(0,0,0,0.2); z-index: 5; }
   .pending { background: #ffe066; color: #2b2b2b; }
   .completed { background: #a7f3d0; color: #065f46; text-decoration: line-through; opacity: 0.85; }
-  .code-note.completed { text-decoration: line-through; opacity: 0.7; }
 </style>
 </head>
 <body>
   <h1>Project Board</h1>
   <div class="controls">
-    <button class="btn btn-text" onclick="addNote('text')">+ Add Text Note</button>
-    <button class="btn btn-code" onclick="addNote('code')">+ Add Code Snippet</button>
+    <button class="btn btn-text" onclick="addNote()">+ Add Text Note</button>
   </div>
   <div class="board-layout">
     <div class="board-col" id="col-todo">
@@ -69,22 +65,15 @@
       }
     }
 
-    function addNote(type) {
+    function addNote() {
       const todoBox = document.getElementById('todo-box');
+      const text = prompt('Enter your note text:');
+      if (text === null) return; 
+
       const newDiv = document.createElement('div');
       newDiv.className = 'note pending';
       newDiv.setAttribute('onclick', 'moveNote(this)');
-
-      if (type === 'text') {
-        const text = prompt('Enter your note text:');
-        if (text === null) return; 
-        newDiv.textContent = text || 'New Note';
-      } else if (type === 'code') {
-        const code = prompt('Enter your code snippet:');
-        if (code === null) return;
-        newDiv.classList.add('code-note');
-        newDiv.textContent = code || '// code';
-      }
+      newDiv.textContent = text || 'New Note';
 
       todoBox.appendChild(newDiv);
     }
