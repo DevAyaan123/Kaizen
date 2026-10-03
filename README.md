@@ -11,3 +11,4 @@ made using HTML
 Copy the code in an editor and run it or Click on the link below
 
 ## URL
+https://devayaan123.github.io/Kaizen/
