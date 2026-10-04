@@ -1,14 +1,23 @@
-# Kaizen
-I made an Japanese Typo That has all the contenets
---Add text inside note
---add note
---click to note if the thing is done
+# Kaizen 
 
-## Code
-made using HTML
+**Kaizen** is a minimalist, web-based project board designed to help you organize tasks and continuously improve your productivity. Built entirely with clean **HTML, CSS, and JavaScript**, this lightweight tool allows you to manage your workflow seamlessly right from your browser.
 
-## To run it
-Copy the code in an editor and run it or Click on the link below
+**[Live Demo](https://devayaan123.github.io/Kaizen/)**
 
-## URL
-https://devayaan123.github.io/Kaizen/
+---
+
+## Features
+
+*   **Quick Note Creation:** Easily add new task notes to your board.
+
+##  Built With
+*   **HTML5** - Structure and layout
+*   **CSS3** - Styling and user interface
+
+## How to Run the Project
+
+You can run this project locally on your machine in just a few seconds.
+
+🔗 [Launch Kaizen Live Board](https://devayaan123.github.io/Kaizen/)
+
+---
