@@ -1,82 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Kaizen</title>
-<link rel="preconnect" href="https://googleapis.com">
-<link rel="preconnect" href="https://gstatic.com" crossorigin>
-<link href="https://googleapis.com" rel="stylesheet">
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', sans-serif; background: #eef2f5; padding: 40px 20px; color: #333; }
-  h1 { text-align: center; margin-bottom: 20px; font-weight: 600; }
-  .controls { text-align: center; margin-bottom: 40px; display: flex; justify-content: center; gap: 15px; }
-  .btn { padding: 10px 20px; font-size: 1rem; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: opacity 0.2s; }
-  .btn-text { background: #3182ce; }
-  .btn:hover { opacity: 0.9; }
-  .board-layout { display: flex; max-width: 1100px; margin: 0 auto; gap: 30px; justify-content: center; flex-wrap: wrap; }
-  .board-col { flex: 1; min-width: 320px; background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); min-height: 500px; }
-  .board-col h2 { font-size: 1.3rem; padding-bottom: 12px; margin-bottom: 20px; border-bottom: 2px solid #e1e8ed; color: #4a5568; }
-  #col-todo h2 { border-color: #f6ad55; }
-  #col-done h2 { border-color: #68d391; }
-  .notes-container { display: flex; flex-wrap: wrap; gap: 16px; min-height: 400px; }
-  .note { width: 140px; height: 140px; padding: 15px; font-family: 'Gochi Hand', cursive; font-size: 1.35rem; line-height: 1.2; cursor: pointer; box-shadow: 3px 3px 8px rgba(0,0,0,0.15); transition: all 0.15s ease-in-out; display: flex; align-items: center; justify-content: center; text-align: center; word-break: break-word; overflow: hidden; }
-  .note:nth-child(3n+1) { transform: rotate(-2deg); }
-  .note:nth-child(3n+2) { transform: rotate(3deg); }
-  .note:nth-child(3n+3) { transform: rotate(-1deg); }
-  .note:hover { transform: scale(1.08) rotate(0deg) !important; box-shadow: 5px 8px 12px rgba(0,0,0,0.2); z-index: 5; }
-  .pending { background: #ffe066; color: #2b2b2b; }
-  .completed { background: #a7f3d0; color: #065f46; text-decoration: line-through; opacity: 0.85; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Kaizen</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #eef2f5;
+            padding: 40px 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .controls {
+            text-align: center;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: opacity 0.2s;
+        }
+        .btn-text {
+            background: #3182ce;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .board-layout {
+            display: flex;
+            max-width: 1100px;
+            margin: 0 auto;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .board-col {
+            flex: 1;
+            min-width: 320px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            min-height: 500px;
+        }
+        .board-col h2 {
+            font-size: 1.3rem;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e1e8ed;
+            color: #4a5568;
+        }
+        #col-todo h2 {
+            border-color: #f6ad55;
+        }
+        #col-done h2 {
+            border-color: #68d391;
+        }
+        .notes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            min-height: 400px;
+        }
+        .note {
+            width: 140px;
+            height: 140px;
+            padding: 15px;
+            font-family: 'Gochi Hand', cursive;
+            font-size: 1.35rem;
+            line-height: 1.2;
+            cursor: pointer;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+            transition: all 0.15s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            word-break: break-word;
+            overflow: hidden;
+        }
+        .note:nth-child(3n+1) {
+            transform: rotate(-2deg);
+        }
+        .note:nth-child(3n+2) {
+            transform: rotate(3deg);
+        }
+        .note:nth-child(3n+3) {
+            transform: rotate(-1deg);
+        }
+        .note:hover {
+            transform: scale(1.08) rotate(0deg) !important;
+            box-shadow: 5px 8px 12px rgba(0,0,0,0.2);
+            z-index: 5;
+        }
+        .pending {
+            background: #ffe066;
+            color: #2b2b2b;
+        }
+        .completed {
+            background: #a7f3d0;
+            color: #065f46;
+            text-decoration: line-through;
+            opacity: 0.85;
+        }
+    </style>
 </head>
 <body>
-  <h1>Project Board</h1>
-  <div class="controls">
-    <button class="btn btn-text" onclick="addNote()">+ Add Text Note</button>
-  </div>
-  <div class="board-layout">
-    <div class="board-col" id="col-todo">
-      <h2>To Do</h2>
-      <div class="notes-container" id="todo-box">
-        <div class="note pending" onclick="moveNote(this)">s</div>
-      </div>
+
+    <h1>Project Board</h1>
+
+    <div class="controls">
+        <button class="btn btn-text" onclick="addNote()">+ Add Text Note</button>
     </div>
-    <div class="board-col" id="col-done">
-      <h2>Done</h2>
-      <div class="notes-container" id="done-box">
-        <div class="note completed" onclick="moveNote(this)"></div>
-      </div>
+
+    <div class="board-layout">
+        <div class="board-col" id="col-todo">
+            <h2>To Do</h2>
+            <div class="notes-container" id="todo-box"></div>
+        </div>
+
+        <div class="board-col" id="col-done">
+            <h2>Done</h2>
+            <div class="notes-container" id="done-box"></div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    function moveNote(element) {
-      const todoBox = document.getElementById('todo-box');
-      const doneBox = document.getElementById('done-box');
-      if (element.classList.contains('pending')) {
-        element.classList.remove('pending');
-        element.classList.add('completed');
-        doneBox.appendChild(element);
-      } else {
-        element.classList.remove('completed');
-        element.classList.add('pending');
-        todoBox.appendChild(element);
-      }
-    }
+    <script>
+        function moveNote(element) {
+            const todoBox = document.getElementById('todo-box');
+            const doneBox = document.getElementById('done-box');
 
-    function addNote() {
-      const todoBox = document.getElementById('todo-box');
-      const text = prompt('Enter your note text:');
-      if (text === null) return; 
+            if (element.classList.contains('pending')) {
+                element.classList.remove('pending');
+                element.classList.add('completed');
+                doneBox.appendChild(element);
+            } else {
+                element.classList.remove('completed');
+                element.classList.add('pending');
+                todoBox.appendChild(element);
+            }
+        }
 
-      const newDiv = document.createElement('div');
-      newDiv.className = 'note pending';
-      newDiv.setAttribute('onclick', 'moveNote(this)');
-      newDiv.textContent = text || 'New Note';
+        function addNote() {
+            const todoBox = document.getElementById('todo-box');
+            const text = prompt('Enter your note text:');
+            
+            if (text === null) return;
 
-      todoBox.appendChild(newDiv);
-    }
-  </script>
+            const newDiv = document.createElement('div');
+            newDiv.className = 'note pending';
+            newDiv.setAttribute('onclick', 'moveNote(this)');
+            newDiv.textContent = text || 'New Note';
+            
+            todoBox.appendChild(newDiv);
+        }
+    </script>
 </body>
 </html>
