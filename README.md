@@ -13,4 +13,5 @@
 ##  Built With
 *   **HTML5** - Structure and layout
 *   **CSS3** - Styling and user interface
-
+## to run it 
+https://devayaan123.github.io/Kaizen/
